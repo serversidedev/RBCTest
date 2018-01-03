@@ -32,18 +32,16 @@ public class ConfigServiceController {
 			@PathVariable(value = "version") String version)
 			throws FileNotFoundException, UnsupportedEncodingException {
 		log.info("Adding properties file: ");
-
+		//The made assumption here is that the contents of the file are typically enough
+		//when returning to the calling client
 		StringBuffer buffer = new StringBuffer("");
 		for (int i = 0; i < properties.getProperties().size(); i++) {
 			log.info("Writing " + properties.getProperties().get(i));
-			// writer.write(properties.getProperties().get(i));
 			buffer.append(properties.getProperties().get(i));
 			buffer.append("\n");
 		}
 		AppConfig appConfig = new AppConfig();
 		appConfig.setId(new AppConfigID(version,appCode));
-		//appConfig.setAppCode(appCode);
-		//appConfig.setVersion(version);
 		appConfig.setFile(buffer.toString().getBytes());
 		appConfigRepository.save(appConfig);
 		return "Record_Added";
@@ -52,7 +50,6 @@ public class ConfigServiceController {
 	public AppConfig getAppConfig(@PathVariable(value = "appCode")String appCode,@PathVariable(value = "version")String version)
 	{
 		log.info("Searching for properties file");
-		//AppConfig appConfig = appConfigRepository.findByAppCodeAndVersion(appCode, version);
 		AppConfig appConfig = appConfigRepository.findById(new AppConfigID(version,appCode));
 		String content = new String(appConfig.getFile());
 		appConfig.setProperties(content);
