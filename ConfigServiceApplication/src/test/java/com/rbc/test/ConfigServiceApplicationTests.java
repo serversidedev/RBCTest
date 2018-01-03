@@ -62,7 +62,7 @@ public class ConfigServiceApplicationTests {
 		mockMvc.perform(requestBuilderAdd).andReturn();
 		RequestBuilder requestBuilderAddAnother = MockMvcRequestBuilders.post("/api/444/config/2").accept(MediaType.APPLICATION_JSON_VALUE).content(testContent.toString()).contentType(MediaType.APPLICATION_JSON);
 		mockMvc.perform(requestBuilderAddAnother).andReturn();
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/444/config").accept(MediaType.APPLICATION_JSON_VALUE).content(testContent.toString()).contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/444/config").accept(MediaType.APPLICATION_JSON_VALUE).content(testContent.toString()).contentType(MediaType.APPLICATION_JSON);
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		String response = result.getResponse().getContentAsString();
 		ObjectMapper mapper = new ObjectMapper();

@@ -55,7 +55,7 @@ public class ConfigServiceController {
 		appConfig.setProperties(content);
 		return appConfig;
 	}
-	@RequestMapping(value="/{appCode}/config", method=RequestMethod.POST,produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/{appCode}/config", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<AppConfig>listAppConfigVersions(@PathVariable(value="appCode")String appCode)
 	{
 		log.info("Listing properties files");
